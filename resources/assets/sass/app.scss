@@ -1,0 +1,43 @@
+
+
+@media (min-width: 48em) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #555;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  color: #333;
+}
+
+
+/*
+ * Override Bootstrap's default container.
+ */
+
+.container {
+  max-width: 60rem;
+}
+.navbar {
+  a {
+    color: #eee;
+    &:hover {
+    color: #fff !important;
+    background: lighten(#337AB7, 10%) !important;
+    }
+  }
+}
