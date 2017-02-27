@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Post;
+use App\Billing\Stripe;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer("posts.partial.sidebar",function ($view) {
           $view->with("archives", Post::archives());
         });
+
     }
 
     /**
@@ -25,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Stripe::class, function () {
+          return new Stripe("123321123.56.78");
+        });
     }
 }

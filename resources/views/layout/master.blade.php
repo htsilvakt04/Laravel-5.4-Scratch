@@ -10,6 +10,11 @@
   </head>
   <body>
     @include("layout.nav")
+    @if(session()->has("message"))
+      <div class="alert alert-success" role="alert">
+          {{session("message")}}
+      </div>
+    @endif
     @yield("content")
   </body>
   @yield("scripts.footer")

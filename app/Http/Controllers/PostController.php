@@ -10,11 +10,12 @@ class PostController extends Controller
     public function __construct()
     {
       $this->middleware("auth", ["except"=>["index", "show"]]);
-      
+
     }
     public function index()
     {
       $posts = Post::latest()
+          ->with(["comments", "user"])
           ->filter(request(["month", "year"]))
           ->get();
 
@@ -42,6 +43,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+
       return view("posts.show", compact("post"));
     }
 }
