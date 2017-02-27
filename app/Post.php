@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+
 class Post extends Model
 {
     protected $fillable = ["title", "body", "user_id"];
@@ -17,9 +18,10 @@ class Post extends Model
       return $this->belongsTo(User::class);
     }
 
-    public function addComment($body)
+    public function addComment(Comment $comment)
     {
-      return $this->comments()->create(["body" => $body]);
+      $this->comments()->save($comment);
+
     }
 
     public function scopeFilter($query,array $filters)
@@ -30,6 +32,15 @@ class Post extends Model
       if($year = $filters["year"]) {
         $query->whereYear('created_at', Carbon::parse($year)->year);
       }
+    }
+
+    public static function archives()
+    {
+      return static::selectRaw('year(created_at) year,  monthname(created_at) month,  count(*) published')
+                      ->groupBy('year', 'month')
+                      ->orderBy('month', 'asc')
+                      ->get()
+                      ->toArray();
     }
 
 }

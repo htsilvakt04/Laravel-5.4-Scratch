@@ -10,21 +10,15 @@ class PostController extends Controller
     public function __construct()
     {
       $this->middleware("auth", ["except"=>["index", "show"]]);
+      
     }
     public function index()
     {
-      //  get rid of this post to a clean funcion
-      // share archives to all views
       $posts = Post::latest()
           ->filter(request(["month", "year"]))
           ->get();
 
-      $archives = Post::selectRaw('year(created_at) year,  monthname(created_at) month,  count(*) published')
-                      ->groupBy('year', 'month')
-                      ->orderBy('month', 'asc')
-                      ->get()
-                      ->toArray();
-      return view("posts.index", compact("posts", "archives"));
+      return view("posts.index", compact("posts"));
     }
     public function create()
     {

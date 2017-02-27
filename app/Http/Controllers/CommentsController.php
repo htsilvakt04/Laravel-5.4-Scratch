@@ -39,7 +39,11 @@ class CommentsController extends Controller
           "body" => "required|min:2"
         ]);
 
-        $post->addComment(request("body"));
+        $comment = new Comment(["body" => request("body")]);
+
+        $post->addComment($comment);
+
+        auth()->user()->addComment($comment);
 
         return back();
 

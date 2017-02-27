@@ -6,7 +6,7 @@
   <div class="sidebar-module">
     <h4>Archives</h4>
     <ol class="list-unstyled">
-      @if (! empty($archives))
+      @if ($archives)
         @foreach ($archives as $item)
 
           <li><a href="/?month={{$item['month']}}&year={{$item['year']}}">{{$item['month']}} {{$item['year']}}</a></li>
