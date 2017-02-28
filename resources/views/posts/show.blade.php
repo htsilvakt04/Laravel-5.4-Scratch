@@ -7,6 +7,19 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h1>{{$post->title}}</h1>
+
+        @if (count($post->tags))
+          <ul>
+            @foreach($post->tags as $tag)
+              <li>
+                <a href="/posts/tags/{{$tag->name}}">
+                  {{$tag->name}}
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        @endif
+
         <h3>{{$post->body}}</h3>
 
         <div class="row">
